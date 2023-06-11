@@ -1,5 +1,5 @@
 from flask import Flask, render_template, jsonify
-from database import load_jobs_from_db
+from database import load_jobs_from_db, load_job_from_db
 
 app = Flask(__name__)
 
@@ -39,5 +39,12 @@ def list_jobs():
   #return jsonify(JOBS)
 
 
+@app.route("/job/<id>")
+def show_job(id):
+  print(id)
+  job = load_job_from_db(id)
+  return jsonify(job)
+
+
 if __name__ == '__main__':
-  app.run(host='0.0.0.0', port=8080, debug=False)
+  app.run(host='0.0.0.0', port=8080, debug=True)
